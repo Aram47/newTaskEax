@@ -23,11 +23,9 @@ app.get('/products', async (req, res) => {
     
 app.post('/products', (req, res) => {
     const {name, price} = req.body;
-    const obj = {
-        productName : name,
-        productPrice: price,
-    };
-    collection.insertOne(obj);
+    Product.name = name;
+    Product.price = price;
+    collection.insertOne(Product);
     res.status(200).send("product is created!!!");
 });
 
