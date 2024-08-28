@@ -3,8 +3,8 @@ const {MongoClient} = require('mongodb');
 const bodyParser = require('body-parser');
 const client = new MongoClient("mongodb://localhost:27017");
 const app = express();
-const PORT = 4450;
-const dbName = "Market";
+const PORT = 3003;
+const dbName = "aramminasyandb";
 const Product = {
     name : "",
     price: 0.0,
@@ -17,10 +17,14 @@ client.connect();
 const db = client.db(dbName);
 const collection = db.collection('products');
 
+app.get('/', (req, res) => {
+	res.status(200).send("Hello World!!!");
+});
+
 app.get('/products', async (req, res) => {
     res.status(200).send(await collection.find().toArray());
 });
-    
+   
 app.post('/products', async (req, res) => {
     const {name, price} = req.body;
     Product.name = name;
