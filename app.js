@@ -21,11 +21,11 @@ app.get('/products', async (req, res) => {
     res.status(200).send(await collection.find().toArray());
 });
     
-app.post('/products', (req, res) => {
+app.post('/products', async (req, res) => {
     const {name, price} = req.body;
     Product.name = name;
     Product.price = price;
-    collection.insertOne(Product);
+    await collection.insertOne(Product);
     res.status(200).send("product is created!!!");
 });
 
